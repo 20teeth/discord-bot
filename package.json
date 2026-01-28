@@ -1,11 +1,11 @@
 {
   "name": "discord-bot",
   "version": "1.0.0",
-  "description": "20t Hack Club verification bot",
-  "main": "index.js",
+  "description": "Hack Club verification bot",
+  "main": "src/index.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "discord.js": "^14.15.3",

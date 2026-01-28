@@ -1,0 +1,41 @@
+const path = require('path');
+
+const ROOT_DIR = path.join(__dirname, '..');
+const DATA_DIR = path.join(ROOT_DIR, 'data');
+
+const GUILD_ID = '1465781098565992510';
+const CHANNEL_ID = '1465781284541562913';
+const ACCESS_ROLE_ID = '1465787951798554665';
+const APPLY_CHANNEL_ID = '1465782713603854426';
+const MOD_APPROVAL_CHANNEL_ID = '1465782234102632479';
+const AUTO_DELETE_CHANNEL_ID = APPLY_CHANNEL_ID;
+const PROJECTS_CATEGORY_ID = '1465782067869515776';
+
+const MOD_ROLE_IDS = ['1465827501745115271'];
+
+const STATE_PATH = path.join(DATA_DIR, 'state.json');
+const APPLICATIONS_PATH = path.join(DATA_DIR, 'applications.json');
+const ACTIONS_PATH = path.join(DATA_DIR, 'actions.json');
+const PROJECTS_PATH = path.join(DATA_DIR, 'projects.json');
+
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN || '';
+const PROJECTS_WEBHOOK_URL = process.env.PROJECTS_WEBHOOK_URL || '';
+
+module.exports = {
+  ROOT_DIR,
+  DATA_DIR,
+  GUILD_ID,
+  CHANNEL_ID,
+  ACCESS_ROLE_ID,
+  APPLY_CHANNEL_ID,
+  MOD_APPROVAL_CHANNEL_ID,
+  AUTO_DELETE_CHANNEL_ID,
+  PROJECTS_CATEGORY_ID,
+  MOD_ROLE_IDS,
+  STATE_PATH,
+  APPLICATIONS_PATH,
+  ACTIONS_PATH,
+  PROJECTS_PATH,
+  DISCORD_TOKEN,
+  PROJECTS_WEBHOOK_URL,
+};
