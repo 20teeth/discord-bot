@@ -12,7 +12,7 @@ const {
   POST_LINK_ID,
   POST_REPO_ID,
 } = require('../constants');
-const { safeReply } = require('../utils/interaction');
+const { safeReply, safeDefer } = require('../utils/interaction');
 const { isProjectChannel, canUseProjectCollab, isModerator, getSlackIdRole } = require('../utils/permissions');
 const { saveProject } = require('../storage/projectsStore');
 const { trySendDm } = require('../utils/moderation');
@@ -98,6 +98,8 @@ async function handlePostModal(interaction) {
     });
     return;
   }
+
+  await safeDefer(interaction);
 
   const title = interaction.fields.getTextInputValue(POST_TITLE_ID).trim();
   const summary = interaction.fields.getTextInputValue(POST_SUMMARY_ID).trim();

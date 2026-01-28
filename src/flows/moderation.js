@@ -11,7 +11,7 @@ const {
   MUTE_ALL_APPROVE_PREFIX,
   MUTE_ALL_DENY_PREFIX,
 } = require('../constants');
-const { safeReply } = require('../utils/interaction');
+const { safeReply, safeDefer } = require('../utils/interaction');
 const { isModerator } = require('../utils/permissions');
 const {
   buildReason,
@@ -184,6 +184,8 @@ async function handleMuteCommand(interaction) {
 
   const subcommand = interaction.options.getSubcommand();
   if (subcommand === 'users') {
+    await safeDefer(interaction);
+
     const users = collectUserOptions(interaction);
     if (users.length === 0) {
       await safeReply(interaction, {
@@ -233,6 +235,8 @@ async function handleMuteCommand(interaction) {
   }
 
   if (subcommand === 'all') {
+    await safeDefer(interaction);
+
     if (!isModerator(member)) {
       await safeReply(interaction, {
         content: 'Only moderators can request a server-wide mute.',
@@ -317,6 +321,8 @@ async function handleUnmuteCommand(interaction) {
 
   const subcommand = interaction.options.getSubcommand();
   if (subcommand === 'users') {
+    await safeDefer(interaction);
+
     const users = collectUserOptions(interaction);
     if (users.length === 0) {
       await safeReply(interaction, {
@@ -364,6 +370,8 @@ async function handleUnmuteCommand(interaction) {
   }
 
   if (subcommand === 'all') {
+    await safeDefer(interaction);
+
     if (!isModerator(member)) {
       await safeReply(interaction, {
         content: 'Only moderators can request a server-wide unmute.',
@@ -458,6 +466,8 @@ async function handleBanButtons(interaction) {
   if (!isBanConfirm && !isBanCancel) {
     return false;
   }
+
+  await safeDefer(interaction);
 
   const actionId = isBanConfirm
     ? customId.slice(BAN_CONFIRM_PREFIX.length)
@@ -598,6 +608,8 @@ async function handleMuteAllButtons(interaction) {
   if (!isMuteAllApprove && !isMuteAllDeny) {
     return false;
   }
+
+  await safeDefer(interaction);
 
   const actionId = isMuteAllApprove
     ? customId.slice(MUTE_ALL_APPROVE_PREFIX.length)

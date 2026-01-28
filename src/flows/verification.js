@@ -7,7 +7,7 @@ const {
 } = require('discord.js');
 const { GUILD_ID, ACCESS_ROLE_ID } = require('../config');
 const { MODAL_ID, INPUT_ID } = require('../constants');
-const { safeReply } = require('../utils/interaction');
+const { safeReply, safeDefer } = require('../utils/interaction');
 
 async function handleVerificationButton(interaction) {
   if (!interaction.inGuild() || interaction.guildId !== GUILD_ID) {
@@ -43,6 +43,8 @@ async function handleVerificationModal(interaction) {
     });
     return;
   }
+
+  await safeDefer(interaction);
 
   const slackId = interaction.fields.getTextInputValue(INPUT_ID).trim();
   if (!/^U[0-9A-Z]+$/i.test(slackId)) {

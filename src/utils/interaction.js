@@ -16,13 +16,39 @@ function applyEphemeralFlag(payload) {
 
 async function safeReply(interaction, payload) {
   const finalPayload = applyEphemeralFlag(payload);
-  if (interaction.replied || interaction.deferred) {
-    return interaction.followUp(finalPayload);
+  try {
+    if (interaction.replied || interaction.deferred) {
+      return await interaction.followUp(finalPayload);
+    }
+    return await interaction.reply(finalPayload);
+  } catch (error) {
+    if (error && (error.code === 10062 || error.code === 40060)) {
+      return null;
+    }
+    throw error;
   }
-  return interaction.reply(finalPayload);
+}
+
+async function safeDefer(interaction, { ephemeral = true } = {}) {
+  if (interaction.replied || interaction.deferred) {
+    return null;
+  }
+
+  try {
+    if (ephemeral) {
+      return await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+    }
+    return await interaction.deferReply();
+  } catch (error) {
+    if (error && (error.code === 10062 || error.code === 40060)) {
+      return null;
+    }
+    throw error;
+  }
 }
 
 module.exports = {
   applyEphemeralFlag,
   safeReply,
+  safeDefer,
 };

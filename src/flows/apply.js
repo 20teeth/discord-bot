@@ -24,7 +24,7 @@ const {
   APPLY_APPROVE_PREFIX,
   APPLY_DENY_PREFIX,
 } = require('../constants');
-const { safeReply } = require('../utils/interaction');
+const { safeReply, safeDefer } = require('../utils/interaction');
 const {
   getSlackIdRole,
   canModerateApplications,
@@ -110,6 +110,8 @@ async function handleApplyModal(interaction) {
     });
     return;
   }
+
+  await safeDefer(interaction);
 
   const projectName = interaction.fields
     .getTextInputValue(APPLY_PROJECT_NAME_ID)
@@ -250,6 +252,8 @@ async function handleApplyDecision(interaction) {
     });
     return true;
   }
+
+  await safeDefer(interaction);
 
   const moderator = await interaction.guild.members.fetch(interaction.user.id);
   if (!canModerateApplications(moderator)) {

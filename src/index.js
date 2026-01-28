@@ -41,4 +41,12 @@ client.on('messageCreate', async (message) => {
   await handleMessageCreate(message);
 });
 
+client.on('error', (error) => {
+  console.error('Discord client error:', error);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled promise rejection:', reason);
+});
+
 client.login(DISCORD_TOKEN);
