@@ -87,6 +87,4 @@ The bot stores state in `data/`:
 
 ## Docs
 
-- `CONTRIBUTING.md`
 - `CODE_OF_CONDUCT.md`
-- `SECURITY.md`
