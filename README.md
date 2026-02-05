@@ -2,6 +2,8 @@
 
 A custom Discord bot for 20t with verification, project applications, moderation, and project publishing.
 
+![20t bot](https://healthchecks.io/b/2/77723b83-6b7c-4af6-b10d-a67bbeaac8ce.svg)
+
 ## Setup
 
 1) Install dependencies:
